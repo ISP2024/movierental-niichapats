@@ -40,10 +40,10 @@ class CustomerTest(unittest.TestCase):
 
 	def test_get_total_charge(self):
 		"""test the get_total_charge method"""
-		# Initially, there are no rentals, so total charge should be 0
+		# initially, there are no rentals, so total charge should be 0
 		self.assertEqual(self.c.get_total_charge(), 0.00)
 
-		# Add rentals
+		# add rentals
 		self.c.add_rental(Rental(self.new_movie, 3))
 		self.assertEqual(self.c.get_total_charge(), 9.00)
 
@@ -52,3 +52,20 @@ class CustomerTest(unittest.TestCase):
 
 		self.c.add_rental(Rental(self.childrens_movie, 4))
 		self.assertEqual(self.c.get_total_charge(), 18.50)
+
+	def test_get_rental_points(self):
+		"""test the get_rental_points method"""
+		# initially, there are no rentals, so rental points should be 0
+		self.assertEqual(self.c.get_rental_points(), 0)
+
+		# add rentals
+		self.c.add_rental(Rental(self.new_movie, 1))
+		self.assertEqual(self.c.get_rental_points(), 1)
+		self.c.add_rental(Rental(self.new_movie, 3))
+		self.assertEqual(self.c.get_rental_points(), 4)
+
+		self.c.add_rental(Rental(self.regular_movie, 5))
+		self.assertEqual(self.c.get_rental_points(), 5)
+
+		self.c.add_rental(Rental(self.childrens_movie, 2))
+		self.assertEqual(self.c.get_rental_points(), 6)

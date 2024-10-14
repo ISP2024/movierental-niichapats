@@ -40,7 +40,6 @@ class Customer:
         rental_fmt = "{:40s}  {:6d} {:6.2f}\n"
         
         for rental in self.rentals:
-            frequent_renter_points = rental.rental_points(frequent_renter_points)
             #  add a detail line to statement
             statement += rental_fmt.format(
                             rental.get_movie().get_title(), 
@@ -52,10 +51,14 @@ class Customer:
         statement += "\n"
         statement += "{:40s}  {:6s} {:6.2f}\n".format(
                        "Total Charges", "", self.get_total_charge())
-        statement += "Frequent Renter Points earned: {}\n".format(frequent_renter_points)
+        statement += "Frequent Renter Points earned: {}\n".format(self.get_rental_points())
 
         return statement
 
     def get_total_charge(self):
         """get the total charge"""
         return sum(rental.get_price() for rental in self.rentals)
+
+    def get_rental_points(self):
+        """get the total rental points"""
+        return sum(rental.rental_points(0) for rental in self.rentals)
