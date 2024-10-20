@@ -1,15 +1,8 @@
-from pricing import *
-
-
 class Movie:
     """A movie available for rent."""
 
-    def __init__(self, title, price_code):
+    def __init__(self, title):
         self.title = title
-        self.price_code = price_code
-
-    def get_price_code(self):
-        return self.price_code
 
     def get_title(self):
         return self.title
