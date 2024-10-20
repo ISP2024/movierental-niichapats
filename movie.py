@@ -1,6 +1,8 @@
 import csv
 import logging
 from typing import Optional
+from datetime import datetime
+from pricing import NEW_RELEASE, REGULAR, CHILDRENS
 
 
 class Movie:
@@ -16,6 +18,16 @@ class Movie:
 
     def is_genre(self, genre: str) -> bool:
         return genre.lower() in (g.lower() for g in self.genres)
+
+    def price_code_for_movie(self):
+        """Determine the price code for the movie based on its release year and genres."""
+        current_year = datetime.now().year
+        if self.year == current_year:
+            return NEW_RELEASE
+        elif any(genre.lower() in ["children", "childrens"] for genre in self.genres):
+            return CHILDRENS
+        else:
+            return REGULAR
 
 
 class MovieCatalog:
