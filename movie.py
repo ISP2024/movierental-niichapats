@@ -16,6 +16,9 @@ class Movie:
     def __str__(self):
         return f"{self.title} ({self.year})"
 
+    def get_title(self):
+        return self.title
+
     def is_genre(self, genre: str) -> bool:
         return genre.lower() in (g.lower() for g in self.genres)
 
